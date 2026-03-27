@@ -303,7 +303,6 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- ── PREMIUM MODAL ── -->
 <div class="modal-overlay" id="premiumModal">
   <div class="modal">
     <button class="modal-close" onclick="closePremiumModal()">✕</button>
@@ -327,7 +326,6 @@
   </div>
 </div>
 
-<!-- ── DAILY LIMIT MODAL ── -->
 <div class="modal-overlay" id="limitModal">
   <div class="modal" style="text-align:center">
     <button class="modal-close" onclick="closeLimitModal()">✕</button>
@@ -349,7 +347,6 @@
   </div>
 </div>
 
-<!-- ── AUTH MODAL (Login / Register) ── -->
 <div class="modal-overlay" id="authModal">
   <div class="modal" style="max-width:420px">
     <button class="modal-close" onclick="closeAuthModal()">✕</button>
@@ -358,7 +355,6 @@
       <button class="auth-tab" id="registerTabBtn" onclick="switchAuthTab('register',this)">Create Account</button>
     </div>
 
-    <!-- Login Panel -->
     <div id="loginPanel" class="auth-form-panel">
       <div style="font-size:2rem;text-align:center;margin-bottom:.7rem">👤</div>
       <h3 style="text-align:center;margin-bottom:.3rem">Welcome back</h3>
@@ -376,7 +372,6 @@
       <div class="auth-switch">Don't have an account? <a href="#" onclick="switchAuthTab('register',document.getElementById('registerTabBtn'));return false">Create one free</a></div>
     </div>
 
-    <!-- Register Panel -->
     <div id="registerPanel" class="auth-form-panel" style="display:none">
       <div style="font-size:2rem;text-align:center;margin-bottom:.7rem">🚀</div>
       <h3 style="text-align:center;margin-bottom:.3rem">Create your account</h3>
@@ -400,7 +395,6 @@
   </div>
 </div>
 
-<!-- ── PROFILE MODAL ── -->
 <div class="modal-overlay" id="profileModal">
   <div class="modal profile-modal">
     <button class="modal-close" onclick="closeProfileModal()">✕</button>
@@ -441,7 +435,6 @@
   </div>
 </div>
 
-<!-- ── NAV ── -->
 <nav>
   <a class="nav-logo" href="#">🤖 ProfitLens AI</a>
   <div class="nav-links">
@@ -461,7 +454,6 @@
   </div>
 </nav>
 
-<!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-badge fade-up">✨ Powered by Artificial Intelligence</div>
   <h1 class="fade-up delay-1">
@@ -555,7 +547,6 @@
   </div>
 </section>
 
-<!-- ── HOW IT WORKS ── -->
 <section class="how-bg" id="how-it-works">
   <div class="section-label">How it works</div>
   <h2 class="section-title">4 steps to know if your product sells</h2>
@@ -568,7 +559,6 @@
   </div>
 </section>
 
-<!-- ── FEATURES ── -->
 <section id="features">
   <div class="section-label">Features</div>
   <h2 class="section-title">Everything you need to sell online</h2>
@@ -585,7 +575,6 @@
   </div>
 </section>
 
-<!-- ── BENEFITS ── -->
 <section class="benefits-bg">
   <div class="benefits-inner">
     <div>
@@ -608,7 +597,6 @@
   </div>
 </section>
 
-<!-- ── TESTIMONIALS ── -->
 <section id="testimonials">
   <div class="section-label">Testimonials</div>
   <h2 class="section-title">What our users are saying</h2>
@@ -620,7 +608,6 @@
   </div>
 </section>
 
-<!-- ── PRICING ── -->
 <section class="pricing-bg" id="pricing">
   <div class="section-label">Plans & Pricing</div>
   <h2 class="section-title">Start free. Scale when you're ready.</h2>
@@ -664,7 +651,6 @@
   </div>
 </section>
 
-<!-- ── CUSTOMER SUPPORT ── -->
 <section id="support">
   <div class="section-label">Customer Support</div>
   <h2 class="section-title">We're here to help</h2>
@@ -712,7 +698,6 @@
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
@@ -994,7 +979,7 @@ function changePassword() {
 }
 
 // ══════════════════════════════════════════════
-// SUPPORT FORM — fixed: no page navigation
+// SUPPORT FORM
 // ══════════════════════════════════════════════
 function sendSupportMessage() {
   const email = document.getElementById('supportEmail').value.trim();
@@ -1002,7 +987,6 @@ function sendSupportMessage() {
   const message = document.getElementById('supportMessage').value.trim();
   if (!email || !message) { showToast('⚠️ Please fill in your email and message.', 'error'); return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('⚠️ Please enter a valid email address.', 'error'); return; }
-  // Clear and show success — no page navigation
   document.getElementById('supportEmail').value = '';
   document.getElementById('supportSubject').value = '';
   document.getElementById('supportMessage').value = '';
@@ -1019,7 +1003,6 @@ function fillExample(text) {
   const input = document.getElementById('productInput');
   input.value = text;
   input.focus();
-  // Briefly highlight the input
   input.style.borderColor = 'var(--primary)';
   setTimeout(() => { input.style.borderColor = ''; }, 800);
   showToast('💡 Example loaded — click Analyze to proceed!', 'info');
@@ -1029,58 +1012,50 @@ function fillExample(text) {
 // ANALYSIS ENGINE
 // ══════════════════════════════════════════════
 function getFallbackData(input) {
+  const lowerInput = input.toLowerCase();
   const score = Math.floor(Math.random() * 30) + 55;
-  const demands = ['🔥 Very High','🔥 High','🟢 Moderate','🟡 Low-Medium'];
-  const comps = ['🔴 High','🟡 Medium','🟢 Low'];
-  const trends = ['📈 Growing','📊 Stable','🚀 Trending now','📉 Declining'];
-  const audiences = ['18–34 fitness enthusiasts','25–45 home decorators','20–40 tech-savvy buyers','30–50 pet owners','18–35 lifestyle consumers'];
-  const d = demands[Math.floor(Math.random()*demands.length)];
-  const c = comps[Math.floor(Math.random()*comps.length)];
-  const t = trends[Math.floor(Math.random()*trends.length)];
-  const a = audiences[Math.floor(Math.random()*audiences.length)];
-  const margin1 = Math.floor(Math.random()*15)+10;
-  const margin2 = margin1 + Math.floor(Math.random()*12)+8;
+  const verdict = score >= 70 ? 'good' : score >= 50 ? 'mid' : 'bad';
+  const margin1 = Math.floor(Math.random() * 15) + 10;
+  const margin2 = margin1 + Math.floor(Math.random() * 12) + 8;
   const price1 = (margin2 * 2.2).toFixed(2);
   const price2 = (margin2 * 3.0).toFixed(2);
-  const name = input.length > 40 ? input.substring(0,37)+'...' : input;
-  const verdict = score >= 70 ? 'good' : score >= 50 ? 'mid' : 'bad';
-  return {
-    name, score, verdict,
-    demand: d, competition: c, trend: t, audience: a,
-    margin: `$${margin1}–$${margin2}`,
-    price: `$${price1}–$${price2}`,
-    risks: [
-      'High market saturation with established competitors',
-      'Price sensitivity — customers may comparison-shop',
-      'Potential logistics issues and shipping delays',
-      'Seasonality could affect demand in off-peak months'
-    ],
-    adFacebook: `🚀 Tired of settling for less? Introducing ${name} — the product that's changing everything. ✅ Premium quality, fast shipping, 30-day money-back guarantee. Order today and get FREE delivery! 👉 Click "Shop Now" before we sell out.`,
-    adTiktok: `POV: You finally found the product you didn't know you needed 😮‍💨✨ This ${name} is going viral for a reason! Link in bio 🔥 #viral #musthave #tiktokmademebuyit #fyp #shopping`,
-    adInstagram: `✨ Upgrade your everyday with ${name}. Thousands of happy customers can't be wrong. 🛒 Shop now — link in bio. Free shipping on all orders! 💫`,
-    strategies: [
-      'Launch with a limited-time discount (20–30%) to generate initial reviews and social proof',
-      'Target Facebook/Instagram ads at 25–40 year olds with interests in lifestyle and shopping',
-      'Partner with micro-influencers (10K–100K followers) for authentic product reviews',
-      'Use TikTok organic content showing before/after results to drive viral traffic'
-    ]
-  };
+  const name = input.length > 40 ? input.substring(0, 37) + '...' : input;
+
+  let demand, competition, trend, audience, risks, adFacebook, adTiktok, adInstagram, strategies;
+
+  if (lowerInput.includes('tech') || lowerInput.includes('bluetooth') || lowerInput.includes('wireless') || lowerInput.includes('led') || lowerInput.includes('usb')) {
+    demand = '🔥 High'; competition = '🔴 High'; trend = '🚀 Trending now';
+    audience = '18–35 tech enthusiasts, gamers, and early adopters';
+    risks = ['High return rates due to pairing issues','Rapid obsolescence','Strict shipping for batteries','Heavy competition'];
+    adFacebook = `Tired of outdated tech? 🔌 Upgrade with ${name}. Crystal clear performance, zero hassle. ⚡ 20% OFF today!`;
+    adTiktok = `POV: Found the ultimate desk upgrade 🤖✨ Obsessed with this ${name}. Link in bio! #techtok #gadgets`;
+    adInstagram = `Elevate your digital life. 💻✨ Perfect for your setup. Tap link in bio to shop the sale! 🛒`;
+    strategies = ['Partner with YouTube tech reviewers','Bundle with accessories','Offer 1-year warranty ads','Show problem/solution TikToks'];
+  } else {
+    demand = '🟢 Moderate'; competition = '🟡 Medium'; trend = '🚀 Trending now';
+    audience = '25–45 impulse buyers on social media';
+    risks = ['Market saturation','Price sensitivity','Shipping delays','Low barrier to entry'];
+    adFacebook = `Introducing ${name} — changing the game. ✅ Premium quality, fast shipping. 👉 Shop Now!`;
+    adTiktok = `You didn't know you needed this 😮‍💨✨ Viral for a reason! Link in bio 🔥 #musthave #viral`;
+    adInstagram = `✨ Upgrade your everyday with ${name}. 🛒 Shop now — link in bio. Free shipping! 💫`;
+    strategies = ['Launch with 30% discount','Target lookalike audiences','Influencer shoutouts','Post-purchase email flows'];
+  }
+
+  return { name, score, verdict, demand, competition, trend, audience, margin: `$${margin1}–$${margin2}`, price: `$${price1}–$${price2}`, risks, adFacebook, adTiktok, adInstagram, strategies };
 }
 
 async function analyzeWithAI(input) {
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': '', 'anthropic-version': '2023-06-01' },
+    headers: { 'Content-Type': 'application/json', 'x-api-key': 'TU_API_KEY_AQUI', 'anthropic-version': '2023-06-01' },
     body: JSON.stringify({
       model: 'claude-3-haiku-20240307',
-      max_tokens: 900,
-      system: `You are a product profitability analyst for e-commerce and dropshipping. Return ONLY valid JSON — no markdown, no extra text. Fields:
-{"name":"product name max 40 chars","score":integer 0-100,"verdict":"good|mid|bad","demand":"🔥 Very High|🔥 High|🟢 Moderate|🟡 Low-Medium","competition":"🔴 High|🟡 Medium|🟢 Low","margin":"e.g. $12–$22","price":"e.g. $34.99–$49.99","audience":"short description","trend":"📈 Growing|📊 Stable|📉 Declining|🚀 Trending now","risks":["risk 1","risk 2","risk 3","risk 4"],"adFacebook":"ad copy","adTiktok":"TikTok caption with hashtags","adInstagram":"Instagram caption","strategies":["s1","s2","s3","s4"]}
-verdict: good if score>=70, mid if 50-69, bad if <50.`,
-      messages: [{ role: 'user', content: `Analyze for e-commerce profitability: ${input}` }]
+      max_tokens: 1200,
+      system: `You are an elite analyst. Return ONLY raw JSON. No markdown. Format: { "name": string, "score": int, "verdict": "good"|"mid"|"bad", "demand": string, "competition": string, "margin": string, "price": string, "audience": string, "trend": string, "risks": [string], "adFacebook": string, "adTiktok": string, "adInstagram": string, "strategies": [string] }`,
+      messages: [{ role: 'user', content: `Analyze: ${input}` }]
     })
   });
-  if (!res.ok) throw new Error('API ' + res.status);
+  if (!res.ok) throw new Error('API Error');
   const data = await res.json();
   const text = (data.content || []).map(b => b.text || '').join('');
   const clean = text.replace(/```json\n?|```\n?/g, '').trim();
@@ -1095,15 +1070,10 @@ function startLoader() {
   let current = 0;
   document.getElementById('loaderWrap').classList.add('active');
   document.getElementById('loaderFill').style.width = '0%';
-  steps.forEach(i => {
-    const el = document.getElementById('step'+i);
-    el.className = 'loader-step';
-  });
+  steps.forEach(i => document.getElementById('step'+i).className = 'loader-step');
   loaderInterval = setInterval(() => {
     if (current < steps.length) {
-      if (current > 0) {
-        document.getElementById('step'+(current-1)).className = 'loader-step done';
-      }
+      if (current > 0) document.getElementById('step'+(current-1)).className = 'loader-step done';
       document.getElementById('step'+current).className = 'loader-step active';
       document.getElementById('loaderFill').style.width = percents[current] + '%';
       current++;
@@ -1113,50 +1083,27 @@ function startLoader() {
 function stopLoader() {
   clearInterval(loaderInterval);
   document.getElementById('loaderFill').style.width = '100%';
-  [0,1,2,3,4].forEach(i => {
-    document.getElementById('step'+i).className = 'loader-step done';
-  });
+  [0,1,2,3,4].forEach(i => document.getElementById('step'+i).className = 'loader-step done');
   setTimeout(() => {
     document.getElementById('loaderWrap').classList.remove('active');
     document.getElementById('loaderFill').style.width = '0%';
   }, 400);
 }
 
-// ── MAIN ANALYSIS FUNCTION ──
+// ── MAIN ANALYSIS ──
 async function startAnalysis() {
   const input = document.getElementById('productInput').value.trim();
-
-  // 1. Require non-empty input
-  if (!input) {
-    showToast('⚠️ Please enter a product name or URL first.', 'error');
-    document.getElementById('productInput').focus();
-    return;
-  }
-
-  // 2. Require login
+  if (!input) { showToast('⚠️ Enter a product first.', 'error'); return; }
   const user = getCurrentUser();
-  if (!user) {
-    openAuthModal();
-    showToast('🔒 Please sign in to analyze products.', 'info');
-    return;
-  }
+  if (!user) { openAuthModal(); return; }
+  if (!isPremium && credits <= 0) { openLimitModal(); return; }
 
-  // 3. Check credits
-  if (!isPremium && credits <= 0) {
-    openLimitModal();
-    return;
-  }
-
-  // 4. Hide result, show loader
   const resultPanel = document.getElementById('result-panel');
-  resultPanel.className = '';
   resultPanel.style.display = 'none';
   const btn = document.getElementById('analyzeBtn');
   btn.disabled = true;
   btn.textContent = 'Analyzing...';
   startLoader();
-
-  // 5. Spend a credit
   spendCredit();
 
   try {
@@ -1164,23 +1111,20 @@ async function startAnalysis() {
     try {
       data = await analyzeWithAI(input);
     } catch(e) {
-      // API unavailable — use realistic fallback data
       data = getFallbackData(input);
     }
     stopLoader();
     renderResult(data, input);
   } catch(e) {
     stopLoader();
-    showToast('❌ Analysis failed. Please try again.', 'error');
+    showToast('❌ Failed. Try again.', 'error');
   } finally {
     btn.disabled = false;
     btn.textContent = 'Analyze →';
   }
 }
 
-// ── RENDER RESULT ──
 function renderResult(d, input) {
-  // Basic fields
   document.getElementById('r-name').textContent = d.name || input;
   document.getElementById('r-url').textContent = input.startsWith('http') ? input : '';
   document.getElementById('r-demand').textContent = d.demand || '—';
@@ -1190,43 +1134,35 @@ function renderResult(d, input) {
   document.getElementById('r-audience').textContent = d.audience || '—';
   document.getElementById('r-trend').textContent = d.trend || '—';
 
-  // Score ring
   const score = Math.min(100, Math.max(0, parseInt(d.score) || 0));
-  const circumference = 213.6;
-  const offset = circumference - (score / 100) * circumference;
+  const offset = 213.6 - (score / 100) * 213.6;
   const circle = document.getElementById('scoreCircle');
   const verdict = d.verdict || (score >= 70 ? 'good' : score >= 50 ? 'mid' : 'bad');
   circle.style.stroke = verdict === 'good' ? '#00C9A7' : verdict === 'mid' ? '#FFD166' : '#FF5C5C';
   circle.style.strokeDashoffset = offset;
   document.getElementById('r-score').textContent = score;
 
-  // Score label & desc
-  const labels = { good: ['Great Product!', 'Strong market fit — this product has real profit potential.'], mid: ['Decent Product', 'Moderate potential — proceed with a solid marketing strategy.'], bad: ['Risky Product', 'Low profit potential — consider a better niche.'] };
+  const labels = { good: ['Great Product!', 'Strong market fit.'], mid: ['Decent Product', 'Moderate potential.'], bad: ['Risky Product', 'Low potential.'] };
   const [label, desc] = labels[verdict] || labels.mid;
   document.getElementById('r-score-label').textContent = label;
   document.getElementById('r-score-desc').textContent = desc;
 
-  // Verdict badge
   const vb = document.getElementById('r-verdict');
   const verdictMap = { good: ['✅ Strong Buy', 'verdict-good'], mid: ['⚠️ Proceed Carefully', 'verdict-mid'], bad: ['❌ Skip This One', 'verdict-bad'] };
   const [vText, vClass] = verdictMap[verdict] || verdictMap.mid;
-  vb.textContent = vText;
-  vb.className = 'verdict-badge ' + vClass;
+  vb.textContent = vText; vb.className = 'verdict-badge ' + vClass;
 
-  // Risks
   const risksList = document.getElementById('r-risks');
   risksList.innerHTML = '';
   (d.risks || []).forEach(r => {
-    const li = document.createElement('li');
-    li.innerHTML = `<span class="ri">⚠️</span>${r}`;
+    const li = document.createElement('li'); li.innerHTML = `<span class="ri">⚠️</span>${r}`;
     risksList.appendChild(li);
   });
 
-  // Ads
   const adsContent = document.getElementById('ads-content');
   if (isPremium) {
     adsContent.innerHTML = [
-      { platform: '📘 Facebook Ads', copy: d.adFacebook },
+      { platform: '📘 Facebook', copy: d.adFacebook },
       { platform: '📱 TikTok', copy: d.adTiktok },
       { platform: '📸 Instagram', copy: d.adInstagram }
     ].map((ad, i) => `
@@ -1236,82 +1172,41 @@ function renderResult(d, input) {
         <button class="copy-btn" onclick="copyAd(${i})">Copy</button>
       </div>`).join('');
   } else {
-    adsContent.innerHTML = `
-      <div class="premium-gate">
-        <div style="font-size:1.8rem;margin-bottom:.6rem">📢</div>
-        <h4>AI Ad Ideas — Premium Feature</h4>
-        <p>Unlock ready-to-use Facebook, TikTok, and Instagram ad copy generated by AI for this exact product.</p>
-        <button class="unlock-btn" onclick="openPremiumModal()">⭐ Unlock for 5€/month</button>
-      </div>`;
+    adsContent.innerHTML = `<div class="premium-gate"><h4>AI Ads Locked</h4><button class="unlock-btn" onclick="openPremiumModal()">Unlock</button></div>`;
   }
 
-  // Strategy
   const stratContent = document.getElementById('strategy-content');
   if (isPremium) {
-    const strats = d.strategies || [];
-    stratContent.innerHTML = `<ul class="strat-list">${strats.map(s => `<li><span class="ri">🎯</span>${s}</li>`).join('')}</ul>`;
+    stratContent.innerHTML = `<ul class="strat-list">${(d.strategies || []).map(s => `<li><span class="ri">🎯</span>${s}</li>`).join('')}</ul>`;
   } else {
-    // Show first strategy free, gate the rest
-    const strats = d.strategies || [];
-    const first = strats[0] || 'Focus on a specific niche audience for better conversion rates.';
-    stratContent.innerHTML = `
-      <ul class="strat-list" style="margin-bottom:1rem">
-        <li><span class="ri">🎯</span>${first}</li>
-      </ul>
-      <div class="premium-gate">
-        <div style="font-size:1.8rem;margin-bottom:.6rem">🎯</div>
-        <h4>Full Strategy — Premium Feature</h4>
-        <p>Get a complete step-by-step scaling strategy, competitor analysis, and marketing roadmap.</p>
-        <button class="unlock-btn" onclick="openPremiumModal()">⭐ Unlock for 5€/month</button>
-      </div>`;
+    stratContent.innerHTML = `<div class="premium-gate"><h4>Strategies Locked</h4><button class="unlock-btn" onclick="openPremiumModal()">Unlock</button></div>`;
   }
 
-  // Show result panel
   const resultPanel = document.getElementById('result-panel');
   resultPanel.style.display = 'block';
   resultPanel.className = 'show';
-
-  // Switch to overview tab
   switchTab('overview', document.querySelector('.rtab'));
-
-  // Scroll into view
   setTimeout(() => resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
 }
 
 function copyAd(index) {
   const el = document.getElementById('adcopy' + index);
-  if (!el) return;
-  navigator.clipboard.writeText(el.textContent).then(() => {
-    const btn = el.parentElement.querySelector('.copy-btn');
-    btn.textContent = 'Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
-  });
+  navigator.clipboard.writeText(el.textContent).then(() => showToast('Copied!'));
 }
 
-// ── TABS ──
 function switchTab(tab, btn) {
   document.querySelectorAll('.rtab').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-  const pane = document.getElementById('tab-' + tab);
-  if (pane) pane.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
 }
 
-// ── RESET ──
 function resetAnalyzer() {
   document.getElementById('productInput').value = '';
-  const resultPanel = document.getElementById('result-panel');
-  resultPanel.className = '';
-  resultPanel.style.display = 'none';
-  document.getElementById('loaderWrap').classList.remove('active');
-  document.getElementById('productInput').focus();
+  document.getElementById('result-panel').style.display = 'none';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ══════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', initState);
 </script>
 </body>
